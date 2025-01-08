@@ -12,7 +12,7 @@ const bot = new Telegraf(BOT_TOKEN);
 
 // Set up a webhook for Telegram bot
 const PORT = process.env.PORT || 3000; // You can set the port as required
-const URL = process.env.WEBHOOK_URL || 'https://your-webhook-url.ngrok.io'; // Update the webhook URL
+const URL = "https://hagerecrafts-cnzi.vercel.app"
 
 bot.telegram.setWebhook(`${URL}/bot${BOT_TOKEN}`);
 bot.startWebhook(`/bot${BOT_TOKEN}`, null, PORT);
