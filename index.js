@@ -10,6 +10,13 @@ if (!BOT_TOKEN) {
 
 const bot = new Telegraf(BOT_TOKEN);
 
+// Set up a webhook for Telegram bot
+const PORT = process.env.PORT || 3000; // You can set the port as required
+const URL = process.env.WEBHOOK_URL || 'https://your-webhook-url.ngrok.io'; // Update the webhook URL
+
+bot.telegram.setWebhook(`${URL}/bot${BOT_TOKEN}`);
+bot.startWebhook(`/bot${BOT_TOKEN}`, null, PORT);
+
 bot.start((ctx) => {
     ctx.reply('Welcome', {
         reply_markup: {
@@ -18,4 +25,7 @@ bot.start((ctx) => {
     });
 });
 
-bot.launch();
+// Start the bot
+bot.launch()
+    .then(() => console.log(`Bot is running on port ${PORT}`))
+    .catch((err) => console.error(`Error starting bot: ${err}`));
