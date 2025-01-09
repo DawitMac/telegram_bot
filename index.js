@@ -10,7 +10,10 @@
 //     }))
 // bot.launch();
 
-const { Telegraf } = require('telegraf');
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => {const { Telegraf } = require('telegraf');
 const Token = "8184163034:AAGpG9AQFKtvufsz6YgGSuVwso2ZeaCtaro"
 const bot = new Telegraf(Token);
 
@@ -35,3 +38,10 @@ bot.start((ctx) => {
 if (!isBotRunning) {
   bot.launch();
 }
+
+res.send("Express on Vercel")});
+
+app.listen(3000, () => console.log("Server ready on port 3000."));
+
+module.exports = app;
+
