@@ -9,12 +9,14 @@
 //      },
 //     }))
 // bot.launch();
-
 const express = require("express");
+const { Telegraf } = require('telegraf');
 const app = express();
 
-app.get("/", (req, res) => {const { Telegraf } = require('telegraf');
 const Token = "8184163034:AAGpG9AQFKtvufsz6YgGSuVwso2ZeaCtaro"
+
+
+// Initialize the Telegram bot
 const bot = new Telegraf(Token);
 
 // Flag to track bot state
@@ -39,9 +41,18 @@ if (!isBotRunning) {
   bot.launch();
 }
 
-res.send("Express on Vercel")});
+// Express route to handle requests
+app.get("/", (req, res) => {
+  res.send("Express on Vercel");
+});
 
-app.listen(3000, () => console.log("Server ready on port 3000."));
+// Set the port for the server
+const PORT = process.env.PORT || 3000;
 
-module.exports = app;
+// Start the server
+const server = app.listen(PORT, () => {
+  console.log(`Server ready on port ${PORT}.`);
+});
 
+// Export the Express app for Vercel
+module.exports = server;
